@@ -12,6 +12,8 @@ cors==1.0.1
 faker==26.0.0; python_version >= '3.8'
 filelock==3.15.4; python_version >= '3.8'
 flask==3.0.3; python_version >= '3.8'
+flask-bcrypt==1.0.1
+flask-cors==4.0.1
 flask-jwt-extended==4.6.0; python_version >= '3.7' and python_version < '4'
 flask-migrate==4.0.7; python_version >= '3.6'
 flask-restful==0.3.10
