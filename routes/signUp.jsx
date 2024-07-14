@@ -14,13 +14,14 @@ function Register()
   const [password, setPassword] = useState()
   const [repeatPassword, setRepeatPassword] = useState()
   const [name, setName] = useState()
+  const [username, setUserName] = useState()
 
-  console.log(email, password, repeatPassword, name);
+  console.log(email, password, repeatPassword, name, username);
   
   function handleSubmit(e){
     e.preventDefault()
 
-    register(name, email, password)
+    register(name,username, email, password)
   }
 
 
@@ -33,13 +34,19 @@ function Register()
           <div class="card-body p-3 p-md-4 p-xl-5">
             <div class="text-center mb-3">
             </div>
-            <h2 class="fs-6 fw-normal text-center text-secondary mb-4">REGIESTER NEW ACCOUNT</h2>
+            <h2 class="fs-6 fw-normal text-center text-secondary mb-4">NEW USER REGISTRATION</h2>
             <form onSubmit={handleSubmit} >
               <div class="row gy-2 overflow-hidden">
                 <div class="col-12">
                   <div class="form-floating mb-3">
-                    <input type="text" value={name || ""} onChange={(e)=> setName(e.target.value)} class="form-control" name="firstName" id="firstName" placeholder="First Name" required />
-                    <label for="firstName" class="form-label">Name</label>
+                    <input type="text" value={name || ""} onChange={(e)=> setName(e.target.value)} class="form-control" placeholder="name" required />
+                    <label class="form-label">Name</label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-floating mb-3">
+                    <input type="text"  value={username || ""} onChange={(e)=> setUserName(e.target.value)} class="form-control" placeholder="preferred username" required />
+                    <label class="form-label">Username</label>
                   </div>
                 </div>
                 <div class="col-12">
