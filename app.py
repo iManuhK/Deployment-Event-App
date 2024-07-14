@@ -84,8 +84,8 @@ class Current_User(Resource):
             return make_response(response_body, 404)
         
 api.add_resource(Current_User, '/current_user')
+BLACKLIST = set()
 
-BLACKLIST =set()
 @jwt.token_in_blocklist_loader
 def check_if_token_in_blocklist(jwt_header, decrypted_token):
     return decrypted_token['jti'] in BLACKLIST
@@ -93,12 +93,15 @@ def check_if_token_in_blocklist(jwt_header, decrypted_token):
 class Logout(Resource):
     @jwt_required()
     def post(self):
-        response_body = {
-            'message': 'Successfully logged out'
-        }
+        try:
+            jti = get_jwt()['jti']
+            BLACKLIST.add(jti)
+            response_body = {'success': 'Logout successful'}
+            return make_response(response_body, 200)
+        except Exception as e:
+            response_body = {'error': 'Logout failed'}
+            return make_response(response_body, 500)
 
-        return make_response(response_body, 200)
-        
 api.add_resource(Logout, '/logout')
 
 class Users(Resource):
