@@ -16,7 +16,7 @@ export const UserProvider = ({children}) => {
    console.log('====================================');
 
 // Register User
-    const register = (name, email, password) => {
+    const register = (name, username, email, password) => {
         fetch('https://deployment-event-app.onrender.com/users', {
             method: 'POST',
             headers: {
@@ -24,8 +24,9 @@ export const UserProvider = ({children}) => {
             },
             body: JSON.stringify({
                 name: name,
+                username: username,
                 email: email,
-                password: password 
+                password_hash: password
             })
         })
         .then(res => res.json())
@@ -57,7 +58,7 @@ export const UserProvider = ({children}) => {
             },
             body: JSON.stringify({
                 email: email,
-                password: password 
+                password_hash: password 
             })
         })
         .then(res => res.json())
@@ -69,7 +70,7 @@ export const UserProvider = ({children}) => {
                 localStorage.setItem('token', res.access_token)
 
                 console.log(res);
-                nav('/')
+                nav('/dashboard')
             alert("Login success")
         }
         else if(res.error){
