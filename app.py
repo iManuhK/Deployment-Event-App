@@ -93,15 +93,12 @@ def check_if_token_in_blocklist(jwt_header, decrypted_token):
 class Logout(Resource):
     @jwt_required()
     def post(self):
-        jti = get_jwt()['jti']
-        BLACKLIST.add(jti)
-        
         response_body = {
-            'message' : 'Successfully logged out'
+            'message': 'Successfully logged out'
         }
 
         return make_response(response_body, 200)
-
+        
 api.add_resource(Logout, '/logout')
 
 class Users(Resource):
